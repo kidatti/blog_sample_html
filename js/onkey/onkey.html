@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>onkey</title>
+</head>
+<body>
+<div>Please push key.</div>
+<div id="log">
+</div>
+<script>
+    let log = document.getElementById("log")
+    document.onkeydown = keyEvent
+    document.onkeyup = keyEvent
+
+    function keyEvent(event) {
+        let message
+        message = " | type: " + event.type
+        message += " | key: " + event.key
+        message += " | code: " + event.code;
+        message += " | shiftKey: " + event.shiftKey;
+        message += " | ctrlKey: " + event.ctrlKey;
+        message += " | altKey: " + event.altKey;
+        message += " | metaKey: " + event.metaKey;
+        log.insertAdjacentHTML("afterbegin", "<div>"+message+"</div>");
+    }
+</script>
+</body>
+</html>
+
