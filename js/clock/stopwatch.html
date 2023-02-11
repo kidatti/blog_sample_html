@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Stop Watch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap" rel="stylesheet">
+    <style>
+        #time {
+            display: inline-block;
+            font-size: 40px;
+            padding: 10px 10px;
+            border-radius: 10px;
+            color: #000;
+            background-color: #CCC;
+        }
+    </style>
+</head>
+<body>
+<div style="text-align: center; width: 100%;">
+    <div id="time" onclick="stopWatch()">00:00.00</div>
+</div>
+<script>
+    let startTime;
+    let elapsedTime = 0
+    let timer
+    let timerStatus = 0
+    showTime = document.getElementById("time");
+    function stopWatch() {
+        startTime = Date.now()
+        if (timerStatus === 0) {
+            updateTime()
+            timerStatus = 1
+        } else if (timerStatus === 1)  {
+            clearTimeout(timer)
+            timerStatus = 2
+        } else if (timerStatus === 2) {
+            showTime.innerHTML = '00:00.00'
+            timerStatus = 0
+        }
+    }
+
+    function updateTime() {
+        timer = setTimeout(function() {
+            elapsedTime = Date.now() - startTime;
+            showTime.textContent = new Date(elapsedTime).toISOString().slice(14, 22);
+            updateTime()
+        }, 10);
+    }
+</script>
+</body>
+</html>

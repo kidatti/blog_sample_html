@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Clock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+<div style="text-align: center; width: 100%;">
+    <div id="clockDate" style="font-size:20px"></div>
+    <div id="clockTime" style="font-size:40px"></div>
+</div>
+<script>
+    function clockUpdate() {
+        const now = new Date();
+        const year = now.getFullYear()
+        const month = String(now.getMonth()+1).padStart(2, "0")
+        const date = String(now.getDate()).padStart(2, "0")
+        const day = now.getDay()
+        const hour = String(now.getHours()).padStart(2, "0")
+        const minute = String(now.getMinutes()).padStart(2, "0")
+        const second = String(now.getSeconds()).padStart(2, "0")
+
+        const dayname = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        const strDate = `${year}-${month}-${date} (${dayname[day]})`;
+        const strTime = `${hour}:${minute}:${second}`;
+        const clockDate = document.getElementById("clockDate");
+        clockDate.textContent = strDate;
+        const clockTime = document.getElementById("clockTime");
+        clockTime.textContent = strTime;
+    }
+    window.addEventListener('DOMContentLoaded', function(){
+        setInterval(() => {
+            clockUpdate()
+        }, 100);
+    });
+</script>
+</body>
+</html>
